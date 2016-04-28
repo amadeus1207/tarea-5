@@ -1,1 +1,1 @@
-/home/amadeus/Proyectos_varios/AG/actividad_6/build/CMakeFiles/hello.dir
+/home/fernando/Trabajoluces/build/CMakeFiles/hello.dir
