@@ -8,13 +8,13 @@ GLfloat pos_y=0;
 GLint ancho=600;//ancho de la ventana
 GLint alto=600;//alto de la ventana
 
-GLfloat mat_ambient[3]={0.19225, 0.19225, 0.19225};//
-GLfloat mat_diffuse[3]={0.50754, 0.50754, 0.50754};
-GLfloat mat_specular[3]={0.508273, 0.508273, 0.508273};
-GLfloat shine[] = {27.8974};
+GLfloat mat_ambient[3]={0.19225, 0.19225, 0.19225};//se declaran las varible de la luz ambiente
+GLfloat mat_diffuse[3]={0.50754, 0.50754, 0.50754};//se declara las varibles de reflejo de venta 
+GLfloat mat_specular[3]={0.508273, 0.508273, 0.508273};//luz que se refleja directamente
+GLfloat shine[] = {27.8974};//brillo de luz
 
-GLfloat punto_luz[3]={0.0, 0.0, 1.0};
-GLfloat luz_ambiental[]={0.5, 0.0, 0.0};
+GLfloat punto_luz[3]={0.0, 0.0, 1.0};//pone la luz punto de origen 
+GLfloat luz_ambiental[]={0.5, 0.0, 0.0};//define el color de luz ambiental
 
 void init(void) //iniciando 
 {
@@ -55,18 +55,20 @@ void display (void)
 	glLoadIdentity();//carga la matris identidad
 	glPushMatrix();//
 	glLightfv(GL_LIGHT0, GL_POSITION, punto_luz);//se llama a la funcion  punto de luz
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);//define los materiales ambiente
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);//color del material
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);//define el eflejo directo
+
 	glMaterialfv(GL_FRONT, GL_SHININESS, shine);//declarando material para el brillo del foco
-	glTranslated(1.0, 1.0, 0.0);
+	glTranslated(1.0, 1.0, 0.0);// ubicandolo en el primer cuadrante
 	glutSolidSphere(0.6, 80, 80);//parametros de la esfera
 	glFlush();
 	glutSwapBuffers();
 }
 
+//esta funcion cambia el color de los materiales al ser envocada al oprimir una tecla calesquiera
 void cambiar_color_esfera (GLfloat ambient[], GLfloat diffuse[], GLfloat specular[])//funcion q cambia color de la esfera
-{
+{    
 	mat_ambient[0] = ambient[0];
 	mat_ambient[1] = ambient[1];
 	mat_ambient[2] = ambient[2];
@@ -77,7 +79,7 @@ void cambiar_color_esfera (GLfloat ambient[], GLfloat diffuse[], GLfloat specula
 	mat_specular[1] = specular[1];
 	mat_specular[2] = specular[2];
 }
-
+//esta funcion uvica la luz donde se ubica el puntero de mause
 void posicion_raton (int x, int y)//inicia funcion de la posicion del raton
 {
 	pos_x=(GLfloat)x/(ancho/2);
@@ -97,20 +99,20 @@ void keyboard(unsigned char key, int x, int y)
 	GLfloat Shine[] = {0.4};
 	switch (key)
     {
-	case 'c':                //color q cambiara la letra c
-                                    //parametros de los materiales
-		ambient[0]=0.19125;
-		ambient[1]=0.0735;
-		ambient[2]=0.0225;
-		diffuse[0]=0.7038;
-		diffuse[1]=0.27048;
-		diffuse[2]=0.0828;
-		specular[0]=0.256777;
-		specular[1]=0.137622;
-		specular[2]=0.086014;
-		Shine[0] = 0.1;
-		break;
-	case 'r':                  //color q cambiara la letra r
+		case 'c'://color q cambiara la letra c
+		        //parametros de los materiales
+			ambient[0]=0.19125;
+			ambient[1]=0.0735;
+			ambient[2]=0.0225;
+			diffuse[0]=0.7038;
+			diffuse[1]=0.27048;
+			diffuse[2]=0.0828;
+			specular[0]=0.256777;
+			specular[1]=0.137622;
+			specular[2]=0.086014;
+			Shine[0] = 0.1;
+			break;
+		case 'r':                  //color q cambiara la letra r
                                     //parametros de los materiales      
 			ambient[0]=0.05;
 			ambient[1]=0.0;
@@ -123,7 +125,7 @@ void keyboard(unsigned char key, int x, int y)
 			specular[2]=0.04;
 			Shine[0] = 0.078125;
 			break;
-	case 'g' :
+		case 'g' :
 			ambient[0]=0.24725;
 			ambient[1]=0.1995;
 			ambient[2]=0.0745;
@@ -134,8 +136,8 @@ void keyboard(unsigned char key, int x, int y)
 			specular[1]=0.555802;
 			specular[2]=0.366065;
 			Shine[0] = 0.4;
-	break;
-	case 'b' :
+			break;
+		case 'b' :
 			ambient[0]=0.329412;
 			ambient[1]=0.223529;
 			ambient[2]=0.027451;
@@ -146,8 +148,8 @@ void keyboard(unsigned char key, int x, int y)
 			specular[1]=0.941176;
 			specular[2]=0.807843;
 			Shine[0] = 27.8974;
-      break;
-    case 's' :
+			break;
+		case 's' :
 			ambient[0]=0.19225;
 			ambient[1]=0.19225;
 			ambient[2]=0.19225;
@@ -158,7 +160,19 @@ void keyboard(unsigned char key, int x, int y)
 			specular[1]=0.508273;
 			specular[2]=0.508273;
 			Shine[0] = 0.4;
-	  break;
+			break;
+		default:
+			ambient[0]=0.19225;
+			ambient[1]=0.19225;
+			ambient[2]=0.19225;
+			diffuse[0]=0.50754;
+			diffuse[1]=0.50754;
+			diffuse[2]=0.50754;
+			specular[0]=0.508273;
+			specular[1]=0.508273;
+			specular[2]=0.508273;
+			Shine[0] = 0.4;
+			break;
     }
     cambiar_color_esfera(ambient, diffuse, specular);
 	glutPostRedisplay();
