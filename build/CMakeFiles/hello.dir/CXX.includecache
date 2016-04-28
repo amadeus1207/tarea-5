@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/amadeus/Proyectos_varios/AG/actividad_6/main.cpp
+GL/gl.h
+-
+GL/glut.h
+-
+stdlib.h
+-
+
